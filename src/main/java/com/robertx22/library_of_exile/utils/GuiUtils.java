@@ -12,13 +12,13 @@ import java.util.List;
 
 public class GuiUtils {
 
-    public static void renderScaledText(GuiGraphics matrix, int x, int y, float scale, String text, ChatFormatting format) {
+    public static void renderScaledText(GuiGraphics matrix, int x, int y, float scale, MutableComponent text, ChatFormatting format) {
 
         float antiScale = 1 / scale;
 
         matrix.pose().scale(scale, scale, scale);
 
-        double textWidthMinus = Minecraft.getInstance().font.width(text) / 2F * scale;
+        double textWidthMinus = Minecraft.getInstance().font.width(text.getString()) / 2F * scale;
         double textHeightMinus = Minecraft.getInstance().font.lineHeight * scale / 2;
 
         float xp = (float) (x - textWidthMinus);
@@ -27,7 +27,7 @@ public class GuiUtils {
         float xf = (float) (xp * antiScale);
         float yf = (float) (yp * antiScale);
 
-        matrix.drawString(Minecraft.getInstance().font, ExileText.ofText(text).format(format).get(), (int) xf, (int) yf, format.getColor());
+        matrix.drawString(Minecraft.getInstance().font, text, (int) xf, (int) yf, format.getColor());
         matrix.pose().scale(antiScale, antiScale, antiScale);
 
     }
